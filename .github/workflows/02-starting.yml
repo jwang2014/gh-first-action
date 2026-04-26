@@ -40,7 +40,7 @@ jobs:
               with:
                 name: simple-node-app-artifacts
                 path: |
-                    ./dist
+                    dist
                     package.json
     deploy: 
         runs-on: ubuntu-latest
