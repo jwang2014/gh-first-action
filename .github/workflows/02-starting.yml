@@ -41,7 +41,7 @@ jobs:
               run: ls -la
             - name: publish js file name
               id: publish-js-file-name
-              run: echo "js_file_name=$(ls dist/*.js)" >> $GITHUB_OUTPUT
+              run: echo "js_file_name=$(find dist -name '*.js' | head -n 1)" >> $GITHUB_OUTPUT
             - name: Upload build artifacts
               uses: actions/upload-artifact@v7
               with:
