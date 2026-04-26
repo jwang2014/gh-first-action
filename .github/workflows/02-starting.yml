@@ -59,7 +59,7 @@ jobs:
                 name: simple-node-app-artifacts
             - name: list artifacts
               run: ls -la
-            - name: check output js file name
-              run: echo "JS file name: ${{ needs.build.outputs.js_file_name }}"
             - name: deploy to server
               run: echo "Deploying to server..."
+            - name: check output js file name
+              run:  echo "JS file name - ${{ needs.build.outputs.js_file_name }}"
