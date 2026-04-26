@@ -42,8 +42,8 @@ jobs:
               with:
                 name: simple-node-app-artifacts
                 path: |
-                    dist
-                    package.json
+                    02-simple-nod-app/dist
+                    02-simple-nod-app/package.json
     deploy: 
         runs-on: ubuntu-latest
         needs: build
