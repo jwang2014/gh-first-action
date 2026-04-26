@@ -25,6 +25,8 @@ jobs:
         defaults:
             run:
                 working-directory: ./02-simple-nod-app
+        outputs:
+            js_file_name: ${{ steps.publish-js-file-name.outputs.js_file_name }}
         steps:
             - uses: actions/checkout@v3
             - name: Use Node.js 22.x
@@ -37,6 +39,9 @@ jobs:
               run: npm run build
             - name: List build output
               run: ls -la
+            - name: publish js file name
+              id: publish-js-file-name
+              run: echo "js_file_name=$(ls dist/*.js)" >> $GITHUB_OUTPUT
             - name: Upload build artifacts
               uses: actions/upload-artifact@v7
               with:
