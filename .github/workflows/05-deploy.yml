@@ -8,7 +8,7 @@ jobs:
   test:
     defaults:
       run:
-        working-directory: ./05-secrets-deployment
+        working-directory: ./05-env-and-secrets
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.efhmuv0.mongodb.net
       MONGODB_USERNAME: ${{ secrets.MONGODB_USER }}
