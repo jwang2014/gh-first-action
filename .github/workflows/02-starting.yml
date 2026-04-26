@@ -19,7 +19,7 @@ jobs:
                 node-version: 22.x
             - run: npm ci
             - run: npm test
-    deploy: 
+    build: 
         runs-on: ubuntu-latest
         needs: test
         defaults:
@@ -35,5 +35,25 @@ jobs:
               run: npm ci
             - name: Build project
               run: npm run build
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                name: simple-node-app-artifacts
+                path: |
+                    ./dist
+                    package.json
+    deploy: 
+        runs-on: ubuntu-latest
+        needs: build
+        defaults:
+            run:
+                working-directory: ./02-simple-nod-app
+        steps:
+            - name: Download build artifacts
+              uses: actions/download-artifact@v3
+              with:
+                name: simple-node-app-artifacts
+            - name: list artifacts
+              run: ls -la
             - name: deploy to server
               run: echo "Deploying to server..."
