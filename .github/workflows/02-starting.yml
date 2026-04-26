@@ -36,7 +36,7 @@ jobs:
             - name: Build project
               run: npm run build
             - name: Upload build artifacts
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v7
               with:
                 name: simple-node-app-artifacts
                 path: |
@@ -50,7 +50,7 @@ jobs:
                 working-directory: ./02-simple-nod-app
         steps:
             - name: Download build artifacts
-              uses: actions/download-artifact@v3
+              uses: actions/download-artifact@v7
               with:
                 name: simple-node-app-artifacts
             - name: list artifacts
