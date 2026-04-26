@@ -17,7 +17,15 @@ jobs:
               uses: actions/setup-node@v3
               with:
                 node-version: 22.x
+            - name: cache node modules
+              uses: actions/cache@v5
+              with:
+                path: ~/.npm
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-node-
             - run: npm ci
+            - run: npm run lint
             - run: npm test
     build: 
         runs-on: ubuntu-latest
@@ -33,6 +41,13 @@ jobs:
               uses: actions/setup-node@v3
               with:
                 node-version: 22.x
+            - name: cache node modules
+              uses: actions/cache@v5
+              with:
+                path: ~/.npm
+                key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-node-
             - name: Install dependencies and build
               run: npm ci
             - name: Build project
@@ -63,3 +78,7 @@ jobs:
               run: echo "Deploying to server..."
             - name: check output js file name
               run:  echo "JS file name - ${{ needs.build.outputs.js_file_name }}"
+            - name: check environment variable
+              run: echo "Environment variable - ${{ env.ENV_VAR }}"
+              env:
+                ENV_VAR: "This is an environment variable"
